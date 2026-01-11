@@ -1,4 +1,4 @@
-# Data Privacy Protector
+# PII Guard
 
 Detect and anonymize PII (Personally Identifiable Information) in text using regex patterns and optional LLM guards.
 
@@ -13,7 +13,7 @@ Detect and anonymize PII (Personally Identifiable Information) in text using reg
 ## Installation
 
 ```bash
-pip install privacy-protector
+pip install pii-guard
 ```
 
 ## Quick Start
