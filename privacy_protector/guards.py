@@ -269,17 +269,25 @@ class OpenAIGuard(LLMGuard):
                 {
                     "role": "system",
                     "content": (
-                        "You are a PII detection system. Analyze text and identify all "
-                        "personally identifiable information. Return a JSON array where each "
-                        "item has: type (name/email/phone/address/ssn/credit_card/date/ip_address), "
-                        "value (exact text), start (position), end (position). "
-                        "Return [] if no PII found."
+                        "You are a strict PII detection system. Find ALL personally identifiable information.\n\n"
+                        "IMPORTANT: Always detect these types:\n"
+                        "- name: Any person's full name or partial name (first name, last name, or both)\n"
+                        "- email: Email addresses\n"
+                        "- phone: Phone numbers in any format\n"
+                        "- address: Physical addresses, cities, streets\n"
+                        "- ssn: Social security numbers\n"
+                        "- credit_card: Credit/debit card numbers\n"
+                        "- date: Dates that could be birthdays or significant personal dates\n"
+                        "- ip_address: IP addresses\n\n"
+                        "Return JSON: {\"pii\": [{\"type\": \"...\", \"value\": \"exact text\", \"start\": position, \"end\": position}]}\n"
+                        "If no PII found, return: {\"pii\": []}\n\n"
+                        "Be thorough - it's better to flag something as PII than to miss it."
                     )
                 },
-                {"role": "user", "content": f"Detect PII in:\n{text}"}
+                {"role": "user", "content": f"Find ALL PII in this text:\n\n{text}"}
             ],
             response_format={"type": "json_object"},
-            temperature=0.1
+            temperature=0.0
         )
 
         return self._parse_response(text, response)
