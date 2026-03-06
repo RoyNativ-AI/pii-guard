@@ -1,0 +1,8 @@
+faker>=22.0.0
+pydantic>=2.0.0
+
+# Optional LLM Guards (install as needed)
+# openai>=1.50.0           # For OpenAI Guard
+# boto3>=1.34.0            # For AWS Bedrock Guard
+# presidio-analyzer>=2.2.0 # For Presidio Guard
+# httpx>=0.27.0            # For Llama Guard (Ollama)
